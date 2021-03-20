@@ -1,0 +1,17 @@
+{
+  "name": "api文档",
+  "version": "0.0.1",
+  "description": "ibms_server接口文档",
+  "title": "ibms api 文档",
+  "url": "http://123.57.160.67:81",
+  "sampleUrl": "http://123.57.160.67:81",
+
+  "header": {
+    "title": "ibms api文档说明",
+    "filename": "header.md"
+  },
+  "template": {
+  	"withCompare": true,
+  	"withGenerator": true
+  }
+}
