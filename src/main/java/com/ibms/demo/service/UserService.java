@@ -3,11 +3,10 @@ package com.ibms.demo.service;
 import com.github.pagehelper.PageHelper;
 import com.ibms.demo.common.Util;
 import com.ibms.demo.mapper.UserMapper;
-import com.ibms.demo.pojo.PageView;
-import com.ibms.demo.pojo.Role;
-import com.ibms.demo.pojo.User;
+import com.ibms.demo.pojo.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -15,6 +14,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by gyh on 2021/2/3
@@ -26,10 +26,12 @@ public class UserService implements UserDetailsService {
     UserMapper userMapper;
     final PasswordEncoder passwordEncoder;
     final RoleService roleService;
+    final UnitService unitService;
 
-    public UserService(PasswordEncoder passwordEncoder, RoleService roleService) {
+    public UserService(PasswordEncoder passwordEncoder, RoleService roleService, UnitService unitService) {
         this.passwordEncoder = passwordEncoder;
         this.roleService = roleService;
+        this.unitService = unitService;
     }
 
     @Override
@@ -51,6 +53,7 @@ public class UserService implements UserDetailsService {
 
     public Integer deleteUserById(Integer id) {
         if (id == 1) throw new IllegalStateException("不能删除超级管理员");
+        unitService.updateUnitByUserId(id);
         return userMapper.deleteUserById(id);
     }
 

@@ -2,10 +2,13 @@ package com.ibms.demo.service;
 
 import com.ibms.demo.mapper.RoleMapper;
 import com.ibms.demo.pojo.Role;
+import com.ibms.demo.pojo.UserRole;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -53,6 +56,16 @@ public class RoleService {
         return roleMapper.insert(userId, roleId, unitId);
     }
 
+    public Integer updateRoleById(String roleName, Integer id, Integer unitId) {
+        Integer roleId = getRoleIdByName(roleName);
+        return roleMapper.updateRoleById(id, roleId, unitId);
+    }
+
+    public Integer updateRoleByUserIdAndUnitId(String roleName, Integer userId, Integer unitId) {
+        Integer roleId = getRoleIdByName(roleName);
+        return roleMapper.updateRoleByUserIdAndUnitId(userId, roleId, unitId);
+    }
+
     /**
      * 给用户移除角色
      *
@@ -63,5 +76,11 @@ public class RoleService {
     public Integer removeRoleToUser(int userId, String roleName, Integer unitId) {
         Integer roleId = getRoleIdByName(roleName);
         return roleMapper.removeRoleToUser(userId, roleId, unitId);
+    }
+
+    public List<UserRole> findByUserIdAndRoleId(Integer userId, String roleName) {
+        Integer userRoleId = getRoleIdByName(roleName);
+        List<UserRole> userRoles = roleMapper.findByUserIdAndRoleId(userId, userRoleId);
+        return userRoles == null ? Collections.emptyList() : userRoles;
     }
 }

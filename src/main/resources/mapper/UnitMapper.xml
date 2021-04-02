@@ -26,6 +26,10 @@
   <select id="findAll" resultMap="UnitMapper">
     select * from unit
   </select>
+
+  <select id="findByUserId" resultMap="BaseResultMap">
+    select * from unit where user_id = #{userId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     <!--@mbg.generated-->
     delete from unit

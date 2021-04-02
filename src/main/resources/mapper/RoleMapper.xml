@@ -25,7 +25,19 @@
     <select id="findIdByName" resultType="java.lang.Integer">
         select id from role where name = #{name}
     </select>
+    <select id="findByUserIdAndRoleId" resultType="com.ibms.demo.pojo.UserRole">
+        select * from user_role where user_id = #{userId} and role_id = #{roleId}
+    </select>
+
     <insert id="insert" parameterType="int">
         insert into user_role(user_id, role_id, unit_id) values (#{userId}, #{roleId}, #{unitId})
     </insert>
+
+    <update id="updateRoleById">
+        update user_role set role_id = #{roleId}, unit_id = #{unitId} where id = #{id}
+    </update>
+
+    <update id="updateRoleByUserIdAndUnitId">
+        update user_role set role_id = #{roleId} where user_id = #{userId} and unit_id = #{unitId}
+    </update>
 </mapper>

@@ -11,6 +11,8 @@ public interface UnitMapper {
 
     List<Unit> findAll();
 
+    List<Unit> findByUserId(Integer userId);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Unit record);
